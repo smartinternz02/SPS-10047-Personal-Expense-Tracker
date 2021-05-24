@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="{{ url_for('static',filename='log.jpg') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Font Awesome -->
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        rel="stylesheet"
+        />
+        
+      </head>
+      
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#429ced">
+            <a class="navbar-brand" href="/home">FINANCIIO!</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li> 
+                
+                <li class="nav-item">
+                      <a class="nav-link" href="https://phaneendra3.github.io/">About Us</a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+                </li> -->
+              </ul>
+              <nav class="navbar navbar-dark" style="background-color:#429ced">
+                <form class="form-inline" action="/login" method="POST">
+                  <div class="input-group">
+                    <div class="input-group-prepend">    
+                        </div>
+                          {% if msg=="Account doesn't not exist" %}
+                            <div style="color:rgb(255, 8, 0)" class="mr-3 mt-2">{{ msg }}</div>
+                          {% else %}
+                            <div style="color:rgb(255, 255, 255)" class="mr-3 mt-2">{{ msg }}</div>
+                          {% endif %}
+                          {% if session['id'] %}
+                              <button  type="button" class="btn btn-light mt-3 mr-3" id="donate" > Username : {{session['username']}}</button>
+                              
+                              <a  type="button" class="btn btn-outline-light mt-3 mr-3" id="donate" href="/logout">LOGOUT</a>
+                          {% else %}
+                            <input type="text" name='username' class="form-control mr-sm-2" placeholder="Username" aria-label="uname" aria-describedby="basic-addon1"><br>
+                            <input type="password" name='password' class="form-control mr-sm-2" placeholder="Password" aria-label="password" aria-describedby="basic-addon1">
+                            <button class="btn btn-success mr-sm-2" type="submit">LOGIN</button>
+                          {% endif %}
+                        </div>
+                </form>
+              </nav>
+            </div>
+          </nav>
+    </header>
+    <div style="color:red" class="mr-3 mt-2">{{ wa }}</div>
+
+    <body style="background-color: #ffffff">
+      
+        <div class="jumbotron" style="background-color: #ffffff">
+              
+              
+              {% if session['loggedin'] %}
+                <h1 class="display-3"></h1><IMG src="static/hello.jpg" ALIGN="right" width="500" height="400" />
+                <p class="lead"><b>Welcome to FINANCIIO <b>{{session['username']}}</b></b></p>
+                <p>Tracking your spending on a regular basis can give you an accurate picture of where your money is going and where you’d like it to go instead.</p>
+                <p>FINANCIIO will help you to track your expenses , if you exceeds your income you will be notified and also you can get an analysis of your expenses in graphical forms. </p>
+                <hr class="my-3">
+                <p><b>Please click on the button below to go to you dashboard.</b></p>
+                <br>
+                <p class="lead">  
+                    <a class="btn btn-outline-primary btn-lg" href="/dashboard" role="button">Dashboard</a>
+                    {{sample}}
+                </p>
+                
+              {% else %}
+                <h1 class="display-3"></h1><IMG src="static/phani.jpeg" ALIGN="right"  width="700" height="350" />
+                <p class="lead"><b>FINANCIIO is a webapp where you can manage your expenses.</b></p>
+                <br>
+                <p class="lead"><b>If you are using for the first time,</b></p>
+                <hr class="my-3">
+                <p>Please register yourself by clicking the below button.</p>
+                <br>
+                <br>
+                <p class="lead">  
+                    <a class="btn btn-primary btn-lg"  href="/register" role="button">Register</a>
+                    {{sample}}
+                </p>
+              {% endif %}  
+          </div>
+        
+    </body>
+    
+    <footer class="text-center text-white" style="background-color:#429ced">
+      <!-- Grid container -->
+      <div class="container p-4 ">
+        <div class="row">
+          <!--Grid column-->
+          <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Contact Info :</h5>
+  
+            <p>
+              <br>
+              E-Mail: phaneendrakumarm98@gmail.com
+              <br>
+              <br>
+              Phone Number: +91-9490400846
+              <br>
+              <Address>BIET, Davangere</Address>
+              <br>
+            </p>
+
+          </div>
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-6 col-md-6 mb-6 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+            <br>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="https://medium.com/swlh/business-travel-and-expense-management-software-cb994abe30f0" class="text-white">Expense Guide</a>
+              </li>
+              <br>
+              <li>
+                <a href="https://phaneendra3.github.io/" class="text-white">About Us</a>
+              </li>
+              <br>
+              
+              
+            </ul>
+          </div> 
+      </div>
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+    
+          <!-- Twitter -->
+          <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+            ><i class="fab fa-twitter"></i
+          ></a>
+    
+          <!-- Google -->
+          <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+            ><i class="fab fa-google"></i
+          ></a>
+    
+          <!-- Instagram -->
+          <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+            ><i class="fab fa-instagram"></i
+          ></a>
+    
+          <!-- Linkedin -->
+          <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+    
+          <!-- Github -->
+          <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Phaneendra3" role="button" target="_blank">
+          <i class="fab fa-github"></i>
+          </a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+    
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgb(0, 0, 0);">
+        © 2021 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">FINANCIIO</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+</html>
